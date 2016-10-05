@@ -1,18 +1,11 @@
 // NOTE: module only included in development mode, so can use dev-dependencies
 
-import { createStore, compose } from 'redux';
-
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { persistState } from 'redux-devtools';
+import { createStore } from 'redux';
 
 import rootReducer from '../reducers';
-import DevTools from '../containers/dev_tools';
 
-
-const enhancer = compose(
-  DevTools.instrument(),
-  persistState(window.location.href.match(/[?&]debug_session=([^&#]+)\b/))
-);
+const enhancer =
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(); // eslint-disable-line
 
 const configureStore = initialState => {
   const store = createStore(rootReducer, initialState, enhancer);
