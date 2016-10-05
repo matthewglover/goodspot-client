@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config ./webpack.production.config.js --progress",
+    "coverage": "nyc check-coverage --lines 100, --functions 100, --branches 100",
     "dev": "node webpack_server",
     "lint": "eslint './**/*.js'",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint && nyc npm test && npm run coverage",
+    "test": "ava --verbose --require babel-register"
   },
   "repository": {
     "type": "git",
