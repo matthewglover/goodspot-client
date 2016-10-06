@@ -1,23 +1,33 @@
-import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Paper from 'material-ui/Paper';
+// @flow
+import React, { PropTypes } from 'react';
+import { Provider } from 'react-redux';
+import { Router, Route, IndexRedirect, hashHistory } from 'react-router';
+import requiresAuthentication from './requires_authentication';
+import Login from './login';
+import Main from './main';
+import Splash from './splash';
 
-import Header from './header';
-import VisibleTodoList from '../containers/visible_todo_list';
 
-const style = {
-  padding: '10px',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
+const redirectIfNotAuthenticated = (Component, redirectPath) =>
+  requiresAuthentication(Component, redirectPath, true);
+
+const redirectIfAuthenticated = (Component, redirectPath) =>
+  requiresAuthentication(Component, redirectPath, false);
+
+
+const App = ({ store }: { store: Object }): Object =>
+  <Provider store={store}>
+    <Router history={hashHistory}>
+      <Route path="/" component={Main}>
+        <IndexRedirect to="/splash" />
+        <Route path="splash" component={redirectIfNotAuthenticated(Splash, '/login')} />
+        <Route path="login" component={redirectIfAuthenticated(Login, '/splash')} />
+      </Route>
+    </Router>
+  </Provider>;
+
+App.propTypes = {
+  store: PropTypes.object.isRequired,
 };
-
-const App = () =>
-  <MuiThemeProvider>
-    <Paper style={style}>
-      <Header />
-      <VisibleTodoList />
-    </Paper>
-  </MuiThemeProvider>;
 
 export default App;
