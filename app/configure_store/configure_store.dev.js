@@ -1,8 +1,5 @@
-// NOTE: module only included in development mode, so can use dev-dependencies
-
 import { createStore } from 'redux';
-
-import rootReducer from '../reducers';
+import rootReducer from '../reducers/root_reducer';
 
 const enhancer =
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(); // eslint-disable-line
@@ -11,8 +8,9 @@ const configureStore = initialState => {
   const store = createStore(rootReducer, initialState, enhancer);
 
   if (module.hot) {
-    // eslint-disable-next-line global-require
-    module.hot.accept('../reducers', () => store.replaceReducer(require('../reducers').default));
+    module.hot.accept(
+      '../reducers/root_reducer',
+      () => store.replaceReducer(require('../reducers/root_reducer').default));  // eslint-disable-line global-require, max-len
   }
 
   return store;

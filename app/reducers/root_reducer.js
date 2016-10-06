@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
-import visibilityFilter from './visibility_filter';
-import todos from './todos';
+import auth from './auth_reducer';
 
 // rootReducer :: State -> State
 const rootReducer = combineReducers({
-  visibilityFilter,
-  todos,
+  auth,
 });
 
 export default rootReducer;

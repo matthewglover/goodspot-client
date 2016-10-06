@@ -4,7 +4,7 @@ import { AppContainer } from 'react-hot-loader';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import './css/main.css';
-import Root from './components/root';
+import App from './components/app';
 import configureStore from './configure_store';
 
 // Needed for onTouchTap
@@ -15,7 +15,7 @@ const store = configureStore();
 
 render(
   <AppContainer>
-    <Root store={store} />
+    <App store={store} />
   </AppContainer>,
   document.getElementById('app')
 );
@@ -25,11 +25,11 @@ render(
 if (module.hot) {
   module.hot.accept('./components/root', () => {
     // eslint-disable-next-line global-require
-    const RootContainer = require('./components/root').default;
+    const AppHmr = require('./components/app').default;
 
     render(
       <AppContainer>
-        <RootContainer store={store} />
+        <AppHmr store={store} />
       </AppContainer>,
       document.getElementById('app')
     );

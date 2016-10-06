@@ -1,67 +1,32 @@
 import React, { PropTypes } from 'react';
-import { Router, Route, IndexRedirect, hashHistory, Link, withRouter } from 'react-router';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Provider } from 'react-redux';
+import { Router, Route, IndexRedirect, hashHistory } from 'react-router';
+import requiresAuthentication from './requires_authentication';
+import Login from './login';
+import Main from './main';
+import Splash from './splash';
 
-const auth = { isLoggedIn: false };
 
-const TestApp = ({ children }) =>
-  <div>
-    <div>
-      <Link to="/splash">Splash</Link><br />
-      <Link to="/login">Login</Link><br />
-    </div>
-    {children}
-  </div>;
+const redirectIfNotAuthenticated = (Component, redirectPath) =>
+  requiresAuthentication(Component, redirectPath, true);
 
-TestApp.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+const redirectIfAuthenticated = (Component, redirectPath) =>
+  requiresAuthentication(Component, redirectPath, false);
 
-const Splash = () =>
-  <div>
-    Hello from Splash Component
-  </div>;
 
-const Login = withRouter(({ router }) => {
-  const doLogin = () => {
-    auth.isLoggedIn = true;
-    router.push('/splash');
-  };
-
-  return (
-    <div>
-      <p>Hello from Login Component</p>
-      <a onClick={doLogin}>Log in</a>
-    </div>);
-});
-
-const redirectIfNotAuthenticated = (nextState, replace) => {
-  if (!auth.isLoggedIn) {
-    replace({
-      pathname: '/login',
-      state: { nextPathName: nextState.location.pathname },
-    });
-  }
-};
-
-const redirectIfAuthenticated = (nextState, replace) => {
-  if (auth.isLoggedIn) {
-    replace({
-      pathname: '/splash',
-      state: { nextPathName: nextState.location.pathname },
-    });
-  }
-};
-
-const App = () =>
-  <MuiThemeProvider>
+const App = ({ store }) =>
+  <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path="/" component={TestApp}>
+      <Route path="/" component={Main}>
         <IndexRedirect to="/splash" />
-        <Route path="splash" component={Splash} onEnter={redirectIfNotAuthenticated} />
-        <Route path="login" component={Login} onEnter={redirectIfAuthenticated} />
+        <Route path="splash" component={redirectIfNotAuthenticated(Splash, '/login')} />
+        <Route path="login" component={redirectIfAuthenticated(Login, '/splash')} />
       </Route>
     </Router>
-  </MuiThemeProvider>;
+  </Provider>;
+
+App.propTypes = {
+  store: PropTypes.object.isRequired,
+};
 
 export default App;
