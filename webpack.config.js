@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const { HotModuleReplacementPlugin } = require('webpack');
+const { HotModuleReplacementPlugin, DefinePlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -26,6 +26,7 @@ module.exports = {
   },
 
   plugins: [
+    new DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
     new HtmlWebpackPlugin({ template: `${__dirname}/app/index.tmpl.html` }),
     new HotModuleReplacementPlugin(),
   ],

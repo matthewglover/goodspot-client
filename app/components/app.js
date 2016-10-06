@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRedirect, hashHistory } from 'react-router';
@@ -14,7 +15,7 @@ const redirectIfAuthenticated = (Component, redirectPath) =>
   requiresAuthentication(Component, redirectPath, false);
 
 
-const App = ({ store }) =>
+const App = ({ store }: { store: Object }): Object =>
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={Main}>
