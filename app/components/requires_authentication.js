@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import { compose } from 'ramda';
+import { compose } from 'ramda';    // NOTE: can replace with redux compose?
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { getIsAuthenticated } from '../reducers';
+import { getIsLoggedIn } from '../reducers';
 
 // mapStateToProps :: State -> { isAuthenticated: boolean }
 const mapStateToProps = (state) =>
   ({
-    isAuthenticated: getIsAuthenticated(state),
+    isLoggedIn: getIsLoggedIn(state),
   });
 
 
@@ -29,21 +29,25 @@ const requiresAuthentication =
         this.checkAuth();
       }
 
+      componentDidUpdate() {
+        this.checkAuth();
+      }
+
       checkAuth() {
-        if (this.props.isAuthenticated !== requiredAuthStatus) {
+        if (this.props.isLoggedIn !== requiredAuthStatus) {
           this.props.router.push(redirectPath);
         }
       }
 
       render() {
-        return this.props.isAuthenticated === requiredAuthStatus
+        return this.props.isLoggedIn === requiredAuthStatus
           ? (<MyComponent {...this.props} />)
           : null;
       }
     }
 
     AuthenticatedComponent.propTypes = {
-      isAuthenticated: PropTypes.bool.isRequired,
+      isLoggedIn: PropTypes.bool.isRequired,
       router: PropTypes.object.isRequired,
     };
 

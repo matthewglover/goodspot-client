@@ -8,5 +8,8 @@ const rootReducer = combineReducers({
 
 export default rootReducer;
 
-export const getIsAuthenticated = (state) =>
-  fromAuth.getIsAuthenticated(state.auth);
+export const getIsLoggedIn = (state) => fromAuth.getIsLoggedIn(state.auth);
+
+export const getIsLoggingIn = (state) => fromAuth.getIsLoggingIn(state.auth);
+
+export const getDidLoginFail = (state) => fromAuth.getDidLoginFail(state.auth);

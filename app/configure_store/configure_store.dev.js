@@ -9,7 +9,7 @@ const devToolsEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__
 
 const configureStore = (initialState, customEnhancer) => {
   const enhancers = customEnhancer
-    ? compose(devToolsEnhancer, customEnhancer)
+    ? compose(customEnhancer, devToolsEnhancer)
     : devToolsEnhancer;
 
   const store = createStore(rootReducer, initialState, enhancers);
