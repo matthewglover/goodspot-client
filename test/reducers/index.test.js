@@ -1,5 +1,5 @@
 import test from 'ava';
-import rootReducer from '../../app/reducers/root_reducer';
+import rootReducer from '../../app/reducers';
 
 const initialState = {
   auth: {

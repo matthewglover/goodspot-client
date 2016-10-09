@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import auth from './auth_reducer';
+import auth, * as fromAuth from './auth_reducer';
 
 // rootReducer :: State -> State
 const rootReducer = combineReducers({
@@ -7,3 +7,6 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
+
+export const getIsAuthenticated = (state) =>
+  fromAuth.getIsAuthenticated(state.auth);

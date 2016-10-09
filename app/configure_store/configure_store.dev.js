@@ -1,16 +1,23 @@
-import { createStore } from 'redux';
-import rootReducer from '../reducers/root_reducer';
+import { createStore, compose } from 'redux';
+import rootReducer from '../reducers';
 
-const enhancer =
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(); // eslint-disable-line
+/* eslint-disable no-underscore-dangle */
+const devToolsEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__
+  ? window.__REDUX_DEVTOOLS_EXTENSION__()
+  : undefined;
+/* eslint-enable */
 
-const configureStore = initialState => {
-  const store = createStore(rootReducer, initialState, enhancer);
+const configureStore = (initialState, customEnhancer) => {
+  const enhancers = customEnhancer
+    ? compose(devToolsEnhancer, customEnhancer)
+    : devToolsEnhancer;
+
+  const store = createStore(rootReducer, initialState, enhancers);
 
   if (module.hot) {
     module.hot.accept(
-      '../reducers/root_reducer',
-      () => store.replaceReducer(require('../reducers/root_reducer').default));  // eslint-disable-line global-require, max-len
+      '../reducers',
+      () => store.replaceReducer(require('../reducers').default));  // eslint-disable-line global-require, max-len
   }
 
   return store;
