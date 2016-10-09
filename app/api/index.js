@@ -1,7 +1,9 @@
 
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
 export const authenticateToken =
   () =>
-    Promise.resolve({ name: 'Matt', id: '12345' });
+    delay(1000).then(() => ({ name: 'Matt', id: '12345' }));
 
 export const anotherAction =
   () =>
