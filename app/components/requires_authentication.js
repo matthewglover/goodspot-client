@@ -2,10 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { compose } from 'ramda';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import { getIsAuthenticated } from '../reducers';
 
 // mapStateToProps :: State -> { isAuthenticated: boolean }
-const mapStateToProps =
-  ({ auth: { isAuthenticated } }) => ({ isAuthenticated });
+const mapStateToProps = (state) =>
+  ({
+    isAuthenticated: getIsAuthenticated(state),
+  });
 
 
 // connector :: React.Component -> React.Component
