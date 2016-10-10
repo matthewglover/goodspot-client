@@ -1,15 +1,17 @@
 import test, { afterEach } from 'ava';
 import sinon from 'sinon';
-import { loadState, saveState } from '../app/local_storage';
+import { loadState, saveState, clearState } from '../app/local_storage';
 
 const testData = { test: 'It works!' };
 const testPayload = JSON.stringify(testData);
 const setItemStub = sinon.stub();
 const getItemStub = sinon.stub();
+const removeItemStub = sinon.stub();
 
 
 localStorage.getItem = getItemStub;
 localStorage.setItem = setItemStub;
+localStorage.removeItem = removeItemStub;
 
 
 afterEach(() => {
@@ -43,4 +45,11 @@ test('saveState returns undefined if error in parsing JSON or accessing localSto
   setItemStub.throws(new Error());
   saveState(testData);
   t.is(saveState(), undefined);
+});
+
+test('clearState clears item from localStorage', (t) => {
+  clearState();
+  t.plan(2);
+  t.true(removeItemStub.called);
+  t.is(removeItemStub.lastCall.args[0], 'state');
 });

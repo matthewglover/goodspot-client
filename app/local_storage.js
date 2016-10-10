@@ -16,8 +16,15 @@ const dangerouslySaveState = (state) => {
   localStorage.setItem('state', JSON.stringify(state));
 };
 
+const dangerouslyClearState = () => {
+  localStorage.removeItem('state');
+};
+
 export const loadState =
   tryCatch(dangerouslyLoadState, always(undefined));
 
 export const saveState =
   tryCatch(dangerouslySaveState, logError);
+
+export const clearState =
+  tryCatch(dangerouslyClearState, logError);

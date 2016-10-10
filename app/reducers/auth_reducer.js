@@ -83,4 +83,4 @@ export const getIsLoggingIn = (state: AuthState): boolean =>
   state.status === 'loggingIn';
 
 export const getDidLoginFail = (state: AuthState): boolean =>
-  (state.status === 'loginFailure');
+  state.status === 'loginFailure';
