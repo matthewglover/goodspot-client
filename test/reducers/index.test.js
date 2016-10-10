@@ -14,19 +14,19 @@ const jwt = 'awebtokenstring';
 // Freeze initial states, as want to check that reducer doesn't mutate
 const loggedOutState = Object.freeze({
   auth: {
-    loggingIn: false,
+    status: 'loggedOut',
   },
 });
 
 const loggingInState = Object.freeze({
   auth: {
-    loggingIn: true,
+    status: 'loggingIn',
   },
 });
 
 const loggedInState = Object.freeze({
   auth: {
-    loggingIn: false,
+    status: 'loggedIn',
     credentials,
     jwt,
   },
@@ -34,7 +34,7 @@ const loggedInState = Object.freeze({
 
 const loginFailureState = Object.freeze({
   auth: {
-    logginIn: false,
+    status: 'loginFailure',
     err,
   },
 });
@@ -62,7 +62,7 @@ test('getIsLoggingIn returns false if not logging in', (t) => {
 });
 
 test('getDidLoginFail returns error if login failed', (t) => {
-  t.is(fromReducer.getDidLoginFail(loginFailureState), err);
+  t.true(fromReducer.getDidLoginFail(loginFailureState));
 });
 
 test('getIsLoggingIn returns false if no login failure', (t) => {

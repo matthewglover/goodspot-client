@@ -22,15 +22,15 @@ const jwt = 'awebtokenstring';
 
 // Freeze initial states, as want to check that reducer doesn't mutate
 const loggedOutState = Object.freeze({
-  loggingIn: false,
+  status: 'loggedOut',
 });
 
 const loggingInState = Object.freeze({
-  loggingIn: true,
+  status: 'loggingIn',
 });
 
 const loggedInState = Object.freeze({
-  loggingIn: false,
+  status: 'loggedIn',
   credentials,
   jwt,
 });
@@ -74,5 +74,5 @@ test('authReducer with AUTH_FAILURE action updates state to not logging in', (t)
   const err = new Error('Auth failed');
   const action = { type: AUTH_FAILURE, err };
   const actual = authReducer(loggingInState, action);
-  t.deepEqual(actual, { loggingIn: false, err });
+  t.deepEqual(actual, { status: 'loginFailure', err });
 });
