@@ -17,13 +17,13 @@ const jwt = 'awebtokenstring';
 // Freeze initial states, as want to check that reducer doesn't mutate
 const loggedOutState = Object.freeze({
   auth: {
-    loggingIn: false,
+    status: 'loggedOut',
   },
 });
 
 const loggedInState = Object.freeze({
   auth: {
-    loggingIn: false,
+    status: 'loggedIn',
     credentials,
     jwt,
   },
