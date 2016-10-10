@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { compose } from 'ramda';    // NOTE: can replace with redux compose?
+import { compose } from 'redux';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { getIsLoggedIn } from '../reducers';
