@@ -62,7 +62,7 @@ test('getIsLoggingIn returns false if not logging in', (t) => {
 });
 
 test('getDidLoginFail returns error if login failed', (t) => {
-  t.is(fromReducer.getDidLoginFail(loginFailureState), err);
+  t.true(fromReducer.getDidLoginFail(loginFailureState));
 });
 
 test('getIsLoggingIn returns false if no login failure', (t) => {

@@ -24,7 +24,7 @@ type LoginFailureState = {
   err: Error,
 };
 
-type AuthState =
+export type AuthState =
   LoggedInState |
   LoggingInState |
   LoggedOutState |
@@ -82,7 +82,5 @@ export const getIsLoggedIn = (state: AuthState): boolean =>
 export const getIsLoggingIn = (state: AuthState): boolean =>
   state.status === 'loggingIn';
 
-export const getDidLoginFail = (state: AuthState): false | Error =>
-  (state.status === 'loginFailure'
-    ? state.err
-    : false);
+export const getDidLoginFail = (state: AuthState): boolean =>
+  (state.status === 'loginFailure');
