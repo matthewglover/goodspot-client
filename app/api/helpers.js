@@ -10,5 +10,4 @@ export const loginRoute =
   `${apiUrl}${config.authPath}`;
 
 export const verifyTokenRoute = (jwt: string) =>
-  `${apiUrl}/protected?jwt=${jwt}`;
-  // `${apiUrl}${config.verifyTokenPath}?jwt=${jwt}`;
+  `${apiUrl}${config.verifyTokenPath}?jwt=${jwt}`;
