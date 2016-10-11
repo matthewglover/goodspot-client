@@ -2,6 +2,7 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 import { deepPurple600 } from 'material-ui/styles/colors';
+import { loginRoute } from '../api/helpers';
 
 const styles = {
   width: '100%',
@@ -14,10 +15,9 @@ const styles = {
 
 const Login = () =>
   (<div style={styles}>
-    {/* <a href="/?jwt=12345">Log in</a> */}
     <RaisedButton
       label="Login"
-      href="/?jwt=12345"
+      href={loginRoute}
       secondary
       style={styles.button}
       icon={<FontIcon className="muidocs-icon-custom-github" />}
