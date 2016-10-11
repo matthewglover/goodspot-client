@@ -52,7 +52,8 @@
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
-    "@matthewglover/hapi-wrapper": "^0.2.4",
+    "@matthewglover/hapi-wrapper": "^0.2.5",
+    "boom": "^4.1.0",
     "lodash": "^4.16.3",
     "material-ui": "^0.15.4",
     "ramda": "^0.22.1",
