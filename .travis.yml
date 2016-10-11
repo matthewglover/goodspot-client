@@ -11,11 +11,14 @@ script:
 - npm run precommit
 after_success:
 - "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
+before_deploy:
+- npm run build
 deploy:
   provider: heroku
   api_key:
     secure: XY4XSZWQHt5FrBXOtA33Qh5o67MqJi2D6kGgQy/DwMVKOBuMnG+NiKupk50EOEfMAEdmxvfO74lisXlepEHFlW4wn53uu3HDoiDIu3gb9ErIFouYvmMks0D9K0zKA0UN32Q00bP0ySlueJF9CdnDZOpBgzNcYzsTqS8AasAxAPrtonXr0l3bPLN1YDkSMMzj2dwpag1BZeBDIGVUSJbDYr95xFCtLWIkjXXGdCnuQtTCjVI07tmW7I+/Xjim9WCMe1yU2CQJSzzZIzHnwZaWaXclYB4ZEA8kNq7Ye1+lv0W5RnxNJbkhAVjACvAYbqSNen0ywjNmLekr9IlSXyx6Nu2iii5IZsIvKc290xNnxyU8cvHl05r3MQRGbPPwVEd03Ele23GO+YiqpmJYe22ATadk6ysdHJDmmfB5woqDA7nUEe8M/hFiLQG70uEHObb6cvw+9q0GA0wG8XMLGvM7CfNS+HuQPd3FVc3iLvNRrlrJ5ZpDkn+vjf8RQzP+H0dZ6qV0+6wViFcoHWQvgW6kFQyvA/kl2yaRBAwr2GfuLRafTpkzQnF3J+ZXPpZ7Z6dFa5mChXgWxyV0Hd9A65mQ89Gih2sYsCoLbFUwJ7q2Nhv+8Yy6m1wYNt5otY4CQ+NgGrJ5sAnx7OiMpZzNIdgewokEoTjQ05KEIMFUAuICCDQ=
   app: goodspot-client
+  skip-cleanup: true
   on:
     repo: matthewglover/goodspot-client
     branch: production
