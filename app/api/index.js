@@ -20,7 +20,7 @@ const requireStatusOk = (response: Response): Promise<Response> =>
 
 export const authenticateToken =
   (jwt: string): Promise<Credentials> =>
-    fetch(helpers.verifyTokenRoute(jwt))
+    fetch(helpers.verifyTokenRoute(jwt, { mode: 'cors' }))
     .then(requireStatusOk)
     .then(response => response.json());
 
