@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title>React, Redux, Material-UI Base Project</title>
+    <% for (var css in htmlWebpackPlugin.files.css) { %>
+    <link href="public/<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+    <% } %>
   </head>
   <body>
     <div id="app"></div>
@@ -20,5 +23,9 @@
         s.parentNode.insertBefore(wf, s);
       })();
     </script>
+
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <script src="public/<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+    <% } %>
   </body>
 </html>
