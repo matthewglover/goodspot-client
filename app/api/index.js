@@ -1,10 +1,28 @@
+// @flow
 import * as localStorage from '../local_storage';
+import * as helpers from './helpers';
 
-const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+type Credentials = {
+  accessToken: string,
+  expiresIn: string,
+  iat: number,
+  id: string,
+  name: string,
+  provider: string,
+  tokenType: string,
+};
+
+const requireStatusOk = (response: Response): Promise<Response> =>
+  (response.status >= 400 && response.status <= 600
+    ? Promise.reject(new Error(`Status: ${response.status}: ${response.statusText}`))
+    : Promise.resolve(response));
+
 
 export const authenticateToken =
-  () =>
-    delay(1000).then(() => ({ name: 'Matt', id: '12345' }));
+  (jwt: string): Promise<Credentials> =>
+    fetch(helpers.verifyTokenRoute(jwt))
+    .then(requireStatusOk)
+    .then(response => response.json());
 
 export const logout =
   () => Promise.resolve(localStorage.clearState());

@@ -4,36 +4,39 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { getIsLoggedIn } from '../reducers';
 
-// mapStateToProps :: State -> { isAuthenticated: boolean }
-const mapStateToProps = (state) =>
-  ({
-    isLoggedIn: getIsLoggedIn(state),
-  });
+const mapStateToProps =
+  (state) =>
+    ({
+      isLoggedIn: getIsLoggedIn(state),
+    });
 
 
-// connector :: React.Component -> React.Component
 const connector =
   compose(withRouter, connect(mapStateToProps));
 
 
-// requiresAuthentication :: (React.Component, string, boolean) -> React.Component
 const requiresAuthentication =
-  (MyComponent, redirectPath, requiredAuthStatus = true) => {
-    class AuthenticatedComponent extends Component {
+  (MyComponent, redirectPath, requiredAuthStatus = true) =>
+    connector(class AuthenticatedComponent extends Component {
 
-      componentWillMount() {
+      static propTypes = {
+        isLoggedIn: PropTypes.bool.isRequired,
+        router: PropTypes.object.isRequired,
+      }
+
+      componentWillMount(): void {
         this.checkAuth();
       }
 
-      componentWillReceiveProps() {
+      componentWillReceiveProps(): void {
         this.checkAuth();
       }
 
-      componentDidUpdate() {
+      componentDidUpdate(): void {
         this.checkAuth();
       }
 
-      checkAuth() {
+      checkAuth(): void {
         if (this.props.isLoggedIn !== requiredAuthStatus) {
           this.props.router.push(redirectPath);
         }
@@ -44,14 +47,6 @@ const requiresAuthentication =
           ? (<MyComponent {...this.props} />)
           : null;
       }
-    }
-
-    AuthenticatedComponent.propTypes = {
-      isLoggedIn: PropTypes.bool.isRequired,
-      router: PropTypes.object.isRequired,
-    };
-
-    return connector(AuthenticatedComponent);
-  };
+    });
 
 export default requiresAuthentication;

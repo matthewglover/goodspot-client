@@ -1,0 +1,5 @@
+{
+  "apiUrl": "http://localhost:4000",
+  "authPath": "/fb-login",
+  "verifyTokenPath": "/verify-token"
+}
