@@ -27,7 +27,7 @@ module.exports = {
 
   plugins: [
     new DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
-    new HtmlWebpackPlugin({ template: `${__dirname}/app/index.tmpl.html` }),
+    new HtmlWebpackPlugin({ template: `${__dirname}/app/index_development.tmpl.html` }),
     new HotModuleReplacementPlugin(),
   ],
 };
