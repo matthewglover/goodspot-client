@@ -1,7 +1,7 @@
 // @flow
 import config from '../config.json';
 
-const apiUrl =
+export const apiUrl =
   process.env.NODE_ENV === 'production'
     ? config.productionUrl
     : config.testUrl;

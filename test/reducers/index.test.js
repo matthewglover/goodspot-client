@@ -71,3 +71,14 @@ test('getIsLoggingIn returns false if no login failure', (t) => {
   t.false(fromReducer.getDidLoginFail(loggedInState));
   t.false(fromReducer.getDidLoginFail(loggedOutState));
 });
+
+test('getJwt returns jwt if logged in', (t) => {
+  t.is(fromReducer.getJwt(loggedInState), jwt);
+});
+
+test('getJwt returns empty string if not logged in', (t) => {
+  t.plan(3);
+  t.is(fromReducer.getJwt(loggingInState), '');
+  t.is(fromReducer.getJwt(loginFailureState), '');
+  t.is(fromReducer.getJwt(loggedOutState), '');
+});
