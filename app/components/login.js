@@ -1,5 +1,5 @@
+// @flow
 import React, { PropTypes } from 'react';
-// import { deepPurple600 } from 'material-ui/styles/colors';
 import LoginButton from './login_button';
 
 const styles = {
@@ -10,7 +10,7 @@ const styles = {
   alignItems: 'center',
 };
 
-const Login = (_, { muiTheme: { palette } }) =>
+const Login = (_: void, { muiTheme: { palette } }: Object): React.Element<*> =>
   (<div
     style={{
       ...styles,
