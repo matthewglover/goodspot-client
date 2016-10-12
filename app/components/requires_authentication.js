@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, PropTypes } from 'react';
 import { compose } from 'redux';
 import { withRouter } from 'react-router';
@@ -16,7 +17,9 @@ const connector =
 
 
 const requiresAuthentication =
-  (MyComponent, redirectPath, requiredAuthStatus = true) =>
+  (MyComponent: ReactClass<{}>,
+   redirectPath: string,
+   requiredAuthStatus: boolean = true): ReactClass<{}> =>
     connector(class AuthenticatedComponent extends Component {
 
       static propTypes = {
@@ -48,5 +51,6 @@ const requiresAuthentication =
           : null;
       }
     });
+
 
 export default requiresAuthentication;

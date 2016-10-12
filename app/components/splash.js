@@ -1,7 +1,7 @@
+// @flow
 import React, { PropTypes } from 'react';
 import HeaderBar from './header_bar';
-// import LogoutButton from './logout_button';
-
+import { MuiTheme } from '../flow_types';
 
 const containerStyles = {
   width: '100%',
@@ -13,7 +13,7 @@ const containerStyles = {
 };
 
 
-const Splash = (_, { muiTheme: { palette } }) =>
+const Splash = (_: void, { muiTheme: { palette } }: MuiTheme) =>
   <div
     style={{
       ...containerStyles,
