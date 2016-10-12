@@ -66,7 +66,9 @@
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2",
     "redux-logger": "^2.7.0",
+    "redux-observable": "^0.12.1",
     "redux-thunk": "^2.1.0",
+    "rxjs": "^5.0.0-rc.1",
     "uuid": "^2.0.2"
   },
   "engines": {
