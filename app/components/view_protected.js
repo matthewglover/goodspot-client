@@ -5,17 +5,24 @@ import FlatButton from 'material-ui/FlatButton';
 import * as fromState from '../reducers';
 import * as api from '../api';
 
-const SimpleViewProtected = ({ geocode }) =>
+const SimpleViewProtected = ({ geocode, pingIt }) =>
   <div>
     <FlatButton
-      label="Primary"
+      label="Protected API Call"
       primary
       onTouchTap={geocode}
+    />
+    <br /><br />
+    <FlatButton
+      label="Ping"
+      primary
+      onTouchTap={pingIt}
     />
   </div>;
 
 SimpleViewProtected.propTypes = {
   geocode: PropTypes.func.isRequired,
+  pingIt: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) =>
@@ -23,9 +30,14 @@ const mapStateToProps = (state) =>
     geocode: () => api.geocode(fromState.getJwt(state), 'bethnal'),
   });
 
+const mapDispatchToProps = (dispatch) =>
+  ({
+    pingIt: () => dispatch({ type: 'PING' }),
+  });
+
 // connector :: React.Component -> React.Component
 const connector =
-  connect(mapStateToProps);
+  connect(mapStateToProps, mapDispatchToProps);
 
 const ViewProtected = connector(SimpleViewProtected);
 
