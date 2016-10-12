@@ -2,6 +2,7 @@
 import React, { PropTypes } from 'react';
 import HeaderBar from './header_bar';
 import { MuiTheme } from '../flow_types';
+import ViewProtected from './view_protected';
 
 const containerStyles = {
   width: '100%',
@@ -21,8 +22,8 @@ const Splash = (_: void, { muiTheme: { palette } }: MuiTheme) =>
     }}
   >
     <HeaderBar />
-    <span>done like a kipper!</span>
-    {/* <LogoutButton /> */}
+    <br /><br />
+    <ViewProtected />
   </div>;
 
 Splash.contextTypes = {

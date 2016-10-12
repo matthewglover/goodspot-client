@@ -75,3 +75,8 @@ export const getIsLoggingIn = (state: AuthState): boolean =>
 
 export const getDidLoginFail = (state: AuthState): boolean =>
   state.status === 'loginFailure';
+
+export const getJwt = (state: AuthState): string =>
+  (getIsLoggedIn(state)
+    ? state.jwt
+    : '');

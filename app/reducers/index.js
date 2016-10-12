@@ -27,3 +27,6 @@ export const getIsLoggingIn = (state: AppState): boolean =>
 
 export const getDidLoginFail = (state: AppState): boolean =>
   fromAuth.getDidLoginFail(state.auth);
+
+export const getJwt = (state: AppState): string =>
+  fromAuth.getJwt(state.auth);
