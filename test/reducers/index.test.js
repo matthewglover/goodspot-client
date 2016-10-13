@@ -30,6 +30,10 @@ const loggedInState = Object.freeze({
     credentials,
     jwt,
   },
+  localitySearch: [
+    { description: 'Bethnal Green', id: '12345' },
+    { description: 'Honor Oak Park', id: '4324' },
+  ],
 });
 
 const loginFailureState = Object.freeze({
@@ -81,4 +85,8 @@ test('getJwt returns empty string if not logged in', (t) => {
   t.is(fromReducer.getJwt(loggingInState), '');
   t.is(fromReducer.getJwt(loginFailureState), '');
   t.is(fromReducer.getJwt(loggedOutState), '');
+});
+
+test('getLocalitySearchResults returns locality search results', (t) => {
+  t.is(fromReducer.getLocalitySearchResults(loggedInState), loggedInState.localitySearch);
 });

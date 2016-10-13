@@ -2,7 +2,8 @@
 import React, { PropTypes } from 'react';
 import HeaderBar from './header_bar';
 import { MuiTheme } from '../flow_types';
-import ViewProtected from './view_protected';
+import LocalitySearch from './locality_search';
+import LogoutButton from './logout_button';
 
 const containerStyles = {
   width: '100%',
@@ -23,7 +24,9 @@ const Splash = (_: void, { muiTheme: { palette } }: MuiTheme) =>
   >
     <HeaderBar />
     <br /><br />
-    <ViewProtected />
+    <LocalitySearch />
+    <br /><br />
+    <LogoutButton />
   </div>;
 
 Splash.contextTypes = {

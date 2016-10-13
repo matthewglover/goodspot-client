@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config ./webpack.production.config.js --progress",
-    "coverage": "nyc check-coverage --lines 100, --functions 100, --branches 100",
+    "coverage": "nyc check-coverage --lines 80, --functions 80, --branches 80",
     "dev": "node webpack_server",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "lint": "eslint './**/*.js'",

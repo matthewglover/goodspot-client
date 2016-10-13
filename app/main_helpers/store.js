@@ -2,7 +2,7 @@ import { applyMiddleware } from 'redux';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 import throttle from 'lodash/throttle';
-import { identity } from 'ramda';
+import { identity, compose, pick } from 'ramda';
 import { createEpicMiddleware } from 'redux-observable';
 import configureStore from '../configure_store';
 import { loadState, saveState } from '../local_storage';
@@ -15,13 +15,14 @@ const epicMiddleware =
   createEpicMiddleware(rootEpic);
 
 const saveStateToLocalStorage =
-  throttle(saveState, 1000);
+  throttle(compose(saveState, pick(['auth'])), 1000);
 
 const persistedState = loadState();
 
-const logger = process.env.NODE_ENV !== 'production'
-  ? createLogger()
-  : undefined;
+const logger =
+  process.env.NODE_ENV !== 'production'
+    ? createLogger()
+    : undefined;
 
 const middlewares = [thunk, epicMiddleware, logger].filter(identity);
 

@@ -9,5 +9,8 @@ export const apiUrl =
 export const loginRoute =
   `${apiUrl}${config.authPath}`;
 
-export const verifyTokenRoute = (jwt: string) =>
-  `${apiUrl}${config.verifyTokenPath}?jwt=${jwt}`;
+
+export const requireStatusOk = (response: Response): Promise<Response> =>
+  (response.status >= 400 && response.status <= 600
+    ? Promise.reject(new Error(`Status: ${response.status}: ${response.statusText}`))
+    : Promise.resolve(response));

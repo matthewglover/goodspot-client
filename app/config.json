@@ -2,5 +2,5 @@
   "testUrl": "http://localhost:4000",
   "productionUrl": "https://goodspot-api.herokuapp.com",
   "authPath": "/fb-login",
-  "verifyTokenPath": "/verify-token"
+  "authenticateTokenPath": "/verify-token"
 }
