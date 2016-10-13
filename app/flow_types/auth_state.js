@@ -23,4 +23,4 @@ export type AuthState =
   LoggedOutState |
   LoginFailureState;
 
-export type AuthReducer = (state: ?AuthState, action: Object) => AuthState;
+export type AuthReducer = (state: AuthState, action: Object) => AuthState;

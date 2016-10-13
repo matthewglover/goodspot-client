@@ -1,12 +1,6 @@
-import 'rxjs';
 import { combineEpics } from 'redux-observable';
+import searchForLocalityEpic from './search_for_locality_epic';
 
-const pingEpic = actionStream =>
-  actionStream
-  .ofType('PING')
-  .delay(1000)
-  .mapTo({ type: 'PONG' });
-
-const rootEpic = combineEpics(pingEpic);
+const rootEpic = combineEpics(searchForLocalityEpic);
 
 export default rootEpic;
