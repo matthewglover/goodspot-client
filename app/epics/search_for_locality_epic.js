@@ -1,6 +1,6 @@
 // @flow
 import { Observable } from 'rxjs';
-import { prop, test } from 'ramda';
+import { prop, test, merge } from 'ramda';
 import * as api from '../api';
 import * as fromReducer from '../reducers';
 import { SEARCH_FOR_LOCALITY, LOCALITY_SEARCH_RESULTS } from '../action_types';
@@ -21,10 +21,11 @@ const searchForLocalityEpic =
   (actionStream: Observable, store: Object): Observable<Object> =>
     actionStream
     .ofType(SEARCH_FOR_LOCALITY)
+    .debounceTime(500)
     .map(prop('input'))
     .filter(test(/^\w{3,}$/))
-    .flatMap(autcompleteStream(store))
-    .map(localities => ({ type: LOCALITY_SEARCH_RESULTS, localities }));
+    .switchMap(autcompleteStream(store))
+    .map(merge({ type: LOCALITY_SEARCH_RESULTS }));
 
 
 export default searchForLocalityEpic;

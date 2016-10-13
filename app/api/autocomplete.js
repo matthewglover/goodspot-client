@@ -9,7 +9,8 @@ export const autocomplete =
 
     return fetch(`${helpers.apiUrl}/api/v1/autocomplete?input=${input}`, options)
     .then(helpers.requireStatusOk)
-    .then(response => response.json());
+    .then(response => response.json())
+    .then(localities => ({ input, localities }));
   };
 
 export default autocomplete;
