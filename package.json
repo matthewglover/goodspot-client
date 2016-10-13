@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config ./webpack.production.config.js --progress",
-    "coverage": "nyc check-coverage --lines 80, --functions 80, --branches 80",
+    "coverage": "nyc check-coverage --lines 100, --functions 100, --branches 80",
     "dev": "node webpack_server",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "lint": "eslint './**/*.js'",
     "precommit": "npm run lint && npm run flow && nyc npm test && npm run coverage",
     "test": "ava --verbose --require babel-register --require ./test/helpers/setup_browser_env.js",
-    "test-coverage-report": "nyc npm run test report --reporter=lcov"
+    "test-coverage-report": "nyc --reporter=text-lcov npm test"
   },
   "repository": {
     "type": "git",
