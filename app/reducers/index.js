@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import auth, * as fromAuth from './auth_reducer';
 import localitySearch, * as fromLocalitySearch from './locality_search_reducer';
 import placeFinder, * as fromPlaceFinder from './place_finder_reducer';
-import places from './places_reducer';
+import places, * as fromPlaces from './places_reducer';
 
 import { appStateTypes } from '../flow_types';
 
@@ -27,10 +27,8 @@ export default rootReducer;
 export const getIsLoggedIn = (state: AppState): boolean =>
   fromAuth.getIsLoggedIn(state.auth);
 
-
 export const getIsLoggingIn = (state: AppState): boolean =>
   fromAuth.getIsLoggingIn(state.auth);
-
 
 export const getDidLoginFail = (state: AppState): boolean =>
   fromAuth.getDidLoginFail(state.auth);
@@ -47,3 +45,9 @@ export const getLocalityFromSearchResults =
 
 export const getSelectedLocality = (state: AppState): Object =>
   fromPlaceFinder.getSelectedLocality(state.placeFinder);
+
+export const getSelectedLocalityId = (state: AppState): string =>
+  getSelectedLocality(state).place_id;
+
+export const getPlacesForSelectedLocality = (state: AppState): Object =>
+  fromPlaces.getPlacesForLocality(state.places, getSelectedLocalityId(state));

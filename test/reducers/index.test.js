@@ -11,6 +11,47 @@ const credentials = Object.freeze({
 
 const jwt = 'awebtokenstring';
 
+const placeOne = {
+  place_id: 'EipCZXRobmFsIEdyZWVuIFJvYWQsIExvbmRvbiwgVW5pdGVkIEtpbmdkb20',
+  name: 'The Shoreditch',
+  vicinity: '145 Shoreditch High Street, London',
+  geometry: {
+    location: {
+      lat: 51.52588799999999,
+      lng: -0.07814800000000001,
+    },
+  },
+  types: ['bar', 'nightclub', 'restaurant'],
+};
+
+const placeTwo = {
+  place_id: 'ChIJJ9DmjrocdkgR-TgBZwwKdKc',
+  name: 'Callooh Callay',
+  vicinity: '65 Rivington St, London',
+  geometry: {
+    location: {
+      lat: 51.5262938,
+      lng: -0.0799016,
+    },
+  },
+  types: ['bar', 'nightclub', 'restaurant'],
+};
+
+const localityId = 'EipCZXRobmFsIEdyZWVuIFJvYWQsIExvbmRvbiwgVW5pdGVkIEtpbmdkb20';
+
+const localityIdData = {
+  next_page_token: '12345token',
+  results: [
+    placeOne,
+    placeTwo,
+  ],
+};
+
+
+const places = {
+  [localityId]: localityIdData,
+};
+
 // Freeze initial states, as want to check that reducer doesn't mutate
 const loggedOutState = Object.freeze({
   auth: {
@@ -37,9 +78,10 @@ const loggedInState = Object.freeze({
   placeFinder: {
     locality: {
       description: 'Bethnal Green',
-      place_id: '12345',
+      place_id: localityId,
     },
   },
+  places,
 });
 
 const loginFailureState = Object.freeze({
@@ -109,4 +151,16 @@ test('getSelectedLocality returns selected locality', (t) => {
   t.is(
     fromReducer.getSelectedLocality(loggedInState),
     loggedInState.placeFinder.locality);
+});
+
+test('getSelectedLocalityId returns selected locality id', (t) => {
+  t.is(
+    fromReducer.getSelectedLocalityId(loggedInState),
+    loggedInState.placeFinder.locality.place_id);
+});
+
+test('getPlacesForSelectedLocality returns places for selected locality id', (t) => {
+  t.is(
+    fromReducer.getPlacesForSelectedLocality(loggedInState),
+    loggedInState.places[loggedInState.placeFinder.locality.place_id]);
 });

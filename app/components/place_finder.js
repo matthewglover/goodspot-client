@@ -2,12 +2,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import LocalitySearch from './locality_search';
+import PlacesList from './places_list';
 import * as fromReducers from '../reducers';
 
 const SimplePlaceFinder = ({ selectedLocality }) =>
   <div>
     <LocalitySearch />
-    {selectedLocality ? <div>boom</div> : null}
+    {selectedLocality ? <PlacesList /> : null}
   </div>;
 
 SimplePlaceFinder.propTypes = {
