@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import HeaderBar from './header_bar';
 import { MuiTheme } from '../flow_types';
-import LocalitySearch from './locality_search';
+import PlaceFinder from './place_finder';
 import LogoutButton from './logout_button';
 
 const containerStyles = {
@@ -24,7 +24,8 @@ const Splash = (_: void, { muiTheme: { palette } }: MuiTheme) =>
   >
     <HeaderBar />
     <br /><br />
-    <LocalitySearch />
+    {/* <LocalitySearch /> */}
+    <PlaceFinder />
     <br /><br />
     <LogoutButton />
   </div>;

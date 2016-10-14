@@ -19,5 +19,12 @@ const localitySearch =
 
 export default localitySearch;
 
-export const getLocalitySearchResults = (state: LocalitySearchState): Object[] =>
-  state;
+export const getLocalitySearchResults =
+  (state: LocalitySearchState): Object[] =>
+    state;
+
+export const getLocalityFromSearchResults =
+  (state: LocalitySearchState, index: number, value: string) =>
+    (index === -1 || state[index].description !== value
+      ? undefined
+      : state[index]);

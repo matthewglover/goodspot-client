@@ -31,9 +31,15 @@ const loggedInState = Object.freeze({
     jwt,
   },
   localitySearch: [
-    { description: 'Bethnal Green', id: '12345' },
-    { description: 'Honor Oak Park', id: '4324' },
+    { description: 'Bethnal Green', place_id: '12345' },
+    { description: 'Honor Oak Park', place_id: '4324' },
   ],
+  placeFinder: {
+    locality: {
+      description: 'Bethnal Green',
+      place_id: '12345',
+    },
+  },
 });
 
 const loginFailureState = Object.freeze({
@@ -89,4 +95,18 @@ test('getJwt returns empty string if not logged in', (t) => {
 
 test('getLocalitySearchResults returns locality search results', (t) => {
   t.is(fromReducer.getLocalitySearchResults(loggedInState), loggedInState.localitySearch);
+});
+
+test('getLocalityFromSearchResults returns locality matching index from search results', (t) => {
+  const idx = 0;
+  const value = loggedInState.localitySearch[idx].description;
+  t.is(
+    fromReducer.getLocalityFromSearchResults(loggedInState, idx, value),
+    loggedInState.localitySearch[idx]);
+});
+
+test('getSelectedLocality returns selected locality', (t) => {
+  t.is(
+    fromReducer.getSelectedLocality(loggedInState),
+    loggedInState.placeFinder.locality);
 });

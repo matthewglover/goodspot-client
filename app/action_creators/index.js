@@ -8,4 +8,4 @@ export const authenticate = createAuthenticate(api);
 
 export const logout = createLogout(api);
 
-export { searchForLocality } from './search_locality';
+export { searchForLocality, selectLocality } from './locality';

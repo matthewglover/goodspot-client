@@ -2,6 +2,8 @@
 import { combineReducers } from 'redux';
 import auth, * as fromAuth from './auth_reducer';
 import localitySearch, * as fromLocalitySearch from './locality_search_reducer';
+import placeFinder, * as fromPlaceFinder from './place_finder_reducer.js';
+
 import { appStateTypes } from '../flow_types';
 
 const { AppState } = appStateTypes;
@@ -13,6 +15,7 @@ const rootReducer: AppReducer =
   combineReducers({
     auth,
     localitySearch,
+    placeFinder,
   });
 
 
@@ -35,3 +38,10 @@ export const getJwt = (state: AppState): string =>
 
 export const getLocalitySearchResults = (state: AppState): Object[] =>
   fromLocalitySearch.getLocalitySearchResults(state.localitySearch);
+
+export const getLocalityFromSearchResults =
+  (state: AppState, index: number, value: string): ?Object =>
+    fromLocalitySearch.getLocalityFromSearchResults(state.localitySearch, index, value);
+
+export const getSelectedLocality = (state: AppState): Object =>
+  fromPlaceFinder.getSelectedLocality(state.placeFinder);

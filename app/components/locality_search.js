@@ -10,16 +10,24 @@ import { appStateTypes } from '../flow_types';
 
 const { AppState } = appStateTypes;
 
-const SimpleLocalitySearch = ({ dataSource, searchForLocality }) =>
+
+const localityFilter = (searchText: string, key: string): boolean =>
+  new RegExp(searchText, 'i').test(key);
+
+
+const SimpleLocalitySearch = ({ dataSource, searchForLocality, selectLocality }) =>
   <AutoComplete
-    hintText="Locality"
+    hintText="Locality (e.g. Bethnal Green)"
+    filter={localityFilter}
     dataSource={dataSource.map(prop('description'))}
     onUpdateInput={searchForLocality}
+    onNewRequest={selectLocality}
   />;
 
 SimpleLocalitySearch.propTypes = {
   dataSource: PropTypes.arrayOf(PropTypes.object).isRequired,
   searchForLocality: PropTypes.func.isRequired,
+  selectLocality: PropTypes.func.isRequired,
 };
 
 
@@ -31,8 +39,10 @@ const mapStateToProps = (state: AppState) =>
 
 const mapDispatchToProps = (dispatch: Function) =>
   ({
-    searchForLocality: input =>
+    searchForLocality: (input) =>
       dispatch(fromActionCreators.searchForLocality(input)),
+    selectLocality: (value, index) =>
+      dispatch(fromActionCreators.selectLocality(value, index)),
   });
 
 

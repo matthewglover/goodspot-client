@@ -11,7 +11,7 @@
     "lint": "eslint './**/*.js'",
     "precommit": "npm run lint && npm run flow && nyc npm test && npm run coverage",
     "test": "ava --verbose --require babel-register --require ./test/helpers/setup_browser_env.js",
-    "test-coverage-report": "nyc --reporter=text-lcov npm test"
+    "test-coverage-report": "nyc --reporter=lcov npm test"
   },
   "repository": {
     "type": "git",
@@ -78,7 +78,8 @@
     "exclude": [
       "node_modules",
       "test",
-      "app/loggers.js"
+      "app/loggers.js",
+      "app/flow_types"
     ]
   }
 }
