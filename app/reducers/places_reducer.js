@@ -1,17 +1,17 @@
 // @flow
-import { merge, evolve, concat } from 'ramda';
+import { merge, evolve, concat, has } from 'ramda';
 import {
   PLACES_LOADED } from '../action_types';
 
 type PlacesState = {};
 
-type PlaceIdPlaces = {
+type LocalityIdPlaces = {
   results: Object[],
 };
 
 
 const combine =
-  (crntPlaces: PlaceIdPlaces, newPlaces: PlaceIdPlaces): PlaceIdPlaces =>
+  (crntPlaces: LocalityIdPlaces, newPlaces: LocalityIdPlaces): LocalityIdPlaces =>
     evolve(
       { results: concat(crntPlaces.results) },
       newPlaces
@@ -39,3 +39,11 @@ const places =
   };
 
 export default places;
+
+export const getPlacesForLocality =
+  (state: PlacesState, localityId: string): LocalityIdPlaces =>
+    state[localityId];
+
+export const placeDataExistsForLocality =
+  (state: PlacesState, localityId: string): boolean =>
+    has(localityId, state);

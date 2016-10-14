@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import test from 'ava';
 import { merge } from 'ramda';
-import places from '../../app/reducers/places_reducer';
+import places, * as fromPlacesReducer from '../../app/reducers/places_reducer';
 import {
   PLACES_LOADED } from '../../app/action_types';
 
@@ -105,6 +105,11 @@ const placesStateB = {
   [localityIdB]: localityIdBData,
 };
 
+const placesStateC = {
+  [localityIdA]: localityIdAData,
+  [localityIdB]: localityIdBData,
+};
+
 
 test('places reducer default state is an empty object', (t) => {
   t.deepEqual(places(undefined, {}), {});
@@ -153,4 +158,20 @@ test('places reducer adds new data to existing localityId on PLACES_LOADED actio
   };
 
   t.deepEqual(actual, expected);
+});
+
+test('fromPlacesReducer.getPlacesForLocality returns all places for given locality', (t) => {
+  t.is(
+    fromPlacesReducer.getPlacesForLocality(placesStateC, localityIdA),
+    localityIdAData);
+});
+
+test('fromPlacesReducer.placeDataExistsForLocality returns if data exists for locality', (t) => {
+  t.plan(3);
+  t.true(
+    fromPlacesReducer.placeDataExistsForLocality(placesStateC, localityIdA));
+  t.true(
+    fromPlacesReducer.placeDataExistsForLocality(placesStateC, localityIdB));
+  t.false(
+    fromPlacesReducer.placeDataExistsForLocality(placesStateA, localityIdB));
 });
