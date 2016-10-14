@@ -1,5 +1,5 @@
 // @flow
-import { merge, evolve, concat, has } from 'ramda';
+import { merge, evolve, concat, has, compose, uniqBy, prop } from 'ramda';
 import {
   PLACES_LOADED } from '../action_types';
 
@@ -13,7 +13,11 @@ type LocalityIdPlaces = {
 const combine =
   (crntPlaces: LocalityIdPlaces, newPlaces: LocalityIdPlaces): LocalityIdPlaces =>
     evolve(
-      { results: concat(crntPlaces.results) },
+      {
+        results: compose(
+          uniqBy(prop('place_id')),
+          concat(crntPlaces.results)),
+      },
       newPlaces
     );
 

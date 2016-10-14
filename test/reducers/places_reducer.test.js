@@ -92,6 +92,7 @@ const localityIdBData = {
 
 const localityIdBMoreData = {
   results: [
+    placeThree,
     placeFive,
   ],
 };
