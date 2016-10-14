@@ -2,7 +2,8 @@
 import { combineReducers } from 'redux';
 import auth, * as fromAuth from './auth_reducer';
 import localitySearch, * as fromLocalitySearch from './locality_search_reducer';
-import placeFinder, * as fromPlaceFinder from './place_finder_reducer.js';
+import placeFinder, * as fromPlaceFinder from './place_finder_reducer';
+import places from './places_reducer';
 
 import { appStateTypes } from '../flow_types';
 
@@ -16,6 +17,7 @@ const rootReducer: AppReducer =
     auth,
     localitySearch,
     placeFinder,
+    places,
   });
 
 

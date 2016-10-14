@@ -27,9 +27,9 @@ const placesInLocalityPromise =
 
 const placesInLocalityStream =
   (actionStream: Observable<Object>, store: Object) =>
-  (placeId: string): Observable<Object[]> =>
-    fromPromise(placesInLocalityPromise(store, placeId))
-    .map(places => ({ placeId, places }))
+  (localityId: string): Observable<Object[]> =>
+    fromPromise(placesInLocalityPromise(store, localityId))
+    .map(places => ({ localityId, places }))
     .takeUntil(actionStream.ofType(LOCALITY_SELECTED));
 
 

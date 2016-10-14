@@ -19,7 +19,7 @@ const combine =
 
 
 const updatePlaces = (state: PlacesState, action: Object) => {
-  const crntPlaces = state[action.placeId];
+  const crntPlaces = state[action.localityId];
 
   return crntPlaces
     ? combine(crntPlaces, action.places)
@@ -32,7 +32,7 @@ const places =
       case PLACES_LOADED:
         return merge(
           state,
-          { [action.placeId]: updatePlaces(state, action) });
+          { [action.localityId]: updatePlaces(state, action) });
       default:
         return state;
     }

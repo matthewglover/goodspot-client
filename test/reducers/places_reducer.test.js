@@ -70,9 +70,9 @@ const placeFive = {
   types: ['bar', 'establishment', 'restaurant'],
 };
 
-const placeIdA = 'EipCZXRobmFsIEdyZWVuIFJvYWQsIExvbmRvbiwgVW5pdGVkIEtpbmdkb20';
+const localityIdA = 'EipCZXRobmFsIEdyZWVuIFJvYWQsIExvbmRvbiwgVW5pdGVkIEtpbmdkb20';
 
-const placeIdAData = {
+const localityIdAData = {
   next_page_token: '12345token',
   results: [
     placeOne,
@@ -80,9 +80,9 @@ const placeIdAData = {
   ],
 };
 
-const placeIdB = 'ChIJcb40PTUCdkgRlNQvOoSar98';
+const localityIdB = 'ChIJcb40PTUCdkgRlNQvOoSar98';
 
-const placeIdBData = {
+const localityIdBData = {
   results: [
     placeThree,
     placeFour,
@@ -90,7 +90,7 @@ const placeIdBData = {
 };
 
 
-const placeIdBMoreData = {
+const localityIdBMoreData = {
   results: [
     placeFive,
   ],
@@ -98,11 +98,11 @@ const placeIdBMoreData = {
 
 
 const placesStateA = {
-  [placeIdA]: placeIdAData,
+  [localityIdA]: localityIdAData,
 };
 
 const placesStateB = {
-  [placeIdB]: placeIdBData,
+  [localityIdB]: localityIdBData,
 };
 
 
@@ -113,18 +113,18 @@ test('places reducer default state is an empty object', (t) => {
 test('places reducer adds places on PLACES_LOADED action', (t) => {
   const myAction = {
     type: PLACES_LOADED,
-    placeId: placeIdA,
-    places: placeIdAData,
+    localityId: localityIdA,
+    places: localityIdAData,
   };
 
   t.deepEqual(places(undefined, myAction), placesStateA);
 });
 
-test('places reducer adds new placeId and keeps existing on PLACES_LOADED action', (t) => {
+test('places reducer adds new localityId and keeps existing on PLACES_LOADED action', (t) => {
   const myAction = {
     type: PLACES_LOADED,
-    placeId: placeIdB,
-    places: placeIdBData,
+    localityId: localityIdB,
+    places: localityIdBData,
   };
 
   const actual = places(placesStateA, myAction);
@@ -132,18 +132,18 @@ test('places reducer adds new placeId and keeps existing on PLACES_LOADED action
   t.deepEqual(actual, merge(placesStateA, placesStateB));
 });
 
-test('places reducer adds new data to existing placeId on PLACES_LOADED action', (t) => {
+test('places reducer adds new data to existing localityId on PLACES_LOADED action', (t) => {
   const myAction = {
     type: PLACES_LOADED,
-    placeId: placeIdB,
-    places: placeIdBMoreData,
+    localityId: localityIdB,
+    places: localityIdBMoreData,
   };
 
   const actual = places(placesStateB, myAction);
 
 
   const expected = {
-    [placeIdB]: {
+    [localityIdB]: {
       results: [
         placeThree,
         placeFour,
