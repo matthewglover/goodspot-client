@@ -8,7 +8,7 @@ const {
 
 
 const localitySearch =
-  (state: Object[] = [], action: Object) => {
+  (state: LocalitySearchState = [], action: Object) => {
     switch (action.type) {
       case LOCALITY_SEARCH_RESULTS:
         return action.localities;

@@ -1,16 +1,14 @@
-import * as helpers from './helpers';
+import { fetchProtected, apiUrl, objToQueryString } from './helpers';
+
+const AUTOCOMPLETE_URI =
+  `${apiUrl}/autocomplete`;
+
+const resourceUrl = (input) =>
+  `${AUTOCOMPLETE_URI}?${objToQueryString({ input })}`;
 
 export const autocomplete =
-  (jwt: string, input: string): Promise<Object> => {
-    const options = {
-      cors: true,
-      headers: new Headers({ Authorization: `Bearer ${jwt}` }),
-    };
-
-    return fetch(`${helpers.apiUrl}/api/v1/autocomplete?input=${input}`, options)
-    .then(helpers.requireStatusOk)
-    .then(response => response.json())
+  (jwt: string, input: string): Promise<Object> =>
+    fetchProtected(resourceUrl(input), jwt)
     .then(localities => ({ input, localities }));
-  };
 
 export default autocomplete;

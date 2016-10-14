@@ -14,7 +14,7 @@ type Credentials = {
 
 
 const authenticateTokenRoute = (jwt: string) =>
-  `${helpers.apiUrl}${config.authenticateTokenPath}?jwt=${jwt}`;
+  `${helpers.baseUrl}${config.authenticateTokenPath}?jwt=${jwt}`;
 
 
 const authenticateToken =
