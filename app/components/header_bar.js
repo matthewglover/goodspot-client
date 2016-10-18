@@ -3,9 +3,11 @@ import AppBar from 'material-ui/AppBar';
 import UserOptionsMenu from './user_options_menu';
 
 
-const HeaderBar = () =>
+const HeaderBar = (props) =>
   <AppBar
-    title="Title"
+    {...props}
+    title="Goodspot"
+    showMenuIconButton={false}
     iconElementRight={<UserOptionsMenu />}
   />;
 

@@ -3,6 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>Goodspot</title>
+
+  <meta name="application-name" content="Goodspot">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="./bundle.css">
+  <title>Breathe with me</title>
     <% for (var css in htmlWebpackPlugin.files.css) { %>
     <link href="public/<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
     <% } %>

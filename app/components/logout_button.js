@@ -1,18 +1,15 @@
-// @flow
+  // @flow
 import React, { PropTypes } from 'react';
 import { always } from 'ramda';
 import { connect } from 'react-redux';
-import RaisedButton from 'material-ui/RaisedButton';
-import FontIcon from 'material-ui/FontIcon';
+import MenuItem from 'material-ui/MenuItem';
 import * as fromActionCreators from '../action_creators';
 
 
 const SimpleLogoutButton = ({ logout }) =>
-  <RaisedButton
-    label="Logout"
-    onClick={logout}
-    secondary
-    icon={<FontIcon className="muidocs-icon-custom-github" />}
+  <MenuItem
+    onTouchTap={logout}
+    primaryText="Sign out"
   />;
 
 SimpleLogoutButton.propTypes = {

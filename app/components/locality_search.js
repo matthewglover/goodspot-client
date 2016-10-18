@@ -11,18 +11,26 @@ import { appStateTypes } from '../flow_types';
 const { AppState } = appStateTypes;
 
 
+const styles = {
+  paddingLeft: '20px',
+  paddingRight: '20px',
+};
+
 const localityFilter = (searchText: string, key: string): boolean =>
   new RegExp(searchText, 'i').test(key);
 
 
 const SimpleLocalitySearch = ({ dataSource, searchForLocality, selectLocality }) =>
-  <AutoComplete
-    hintText="Locality (e.g. Bethnal Green)"
-    filter={localityFilter}
-    dataSource={dataSource.map(prop('description'))}
-    onUpdateInput={searchForLocality}
-    onNewRequest={selectLocality}
-  />;
+  <div style={styles}>
+    <AutoComplete
+      fullWidth
+      hintText="Locality (e.g. Bethnal Green)"
+      filter={localityFilter}
+      dataSource={dataSource.map(prop('description'))}
+      onUpdateInput={searchForLocality}
+      onNewRequest={selectLocality}
+    />
+  </div>;
 
 SimpleLocalitySearch.propTypes = {
   dataSource: PropTypes.arrayOf(PropTypes.object).isRequired,

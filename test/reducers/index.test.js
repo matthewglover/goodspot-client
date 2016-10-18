@@ -80,6 +80,7 @@ const loggedInState = Object.freeze({
       description: 'Bethnal Green',
       place_id: localityId,
     },
+    view: 'list',
   },
   places,
 });
@@ -163,4 +164,10 @@ test('getPlacesForSelectedLocality returns places for selected locality id', (t)
   t.is(
     fromReducer.getPlacesForSelectedLocality(loggedInState),
     loggedInState.places[loggedInState.placeFinder.locality.place_id]);
+});
+
+test('getPlaceFinderView returns current placeFinder view state', (t) => {
+  t.is(
+    fromReducer.getPlaceFinderView(loggedInState),
+    loggedInState.placeFinder.view);
 });

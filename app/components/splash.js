@@ -3,11 +3,12 @@ import React, { PropTypes } from 'react';
 import HeaderBar from './header_bar';
 import { MuiTheme } from '../flow_types';
 import PlaceFinder from './place_finder';
-import LogoutButton from './logout_button';
+import BottomBar from './bottom_bar';
+
 
 const containerStyles = {
   width: '100%',
-  height: '100%',
+  minHeight: '100%',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'flex-top',
@@ -22,12 +23,9 @@ const Splash = (_: void, { muiTheme: { palette } }: MuiTheme) =>
       backgroundColor: palette.canvasColor,
     }}
   >
-    <HeaderBar />
-    <br /><br />
-    {/* <LocalitySearch /> */}
-    <PlaceFinder />
-    <br /><br />
-    <LogoutButton />
+    <HeaderBar style={{ position: 'fixed' }} />
+    <PlaceFinder style={{ marginTop: '75px', marginBottom: '50px', width: '100%' }} />
+    <BottomBar />
   </div>;
 
 Splash.contextTypes = {
