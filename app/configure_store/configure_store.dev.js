@@ -1,10 +1,12 @@
 import { createStore, compose } from 'redux';
+import { identity } from 'ramda';
 import rootReducer from '../reducers';
+
 
 /* eslint-disable no-underscore-dangle */
 const devToolsEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__
   ? window.__REDUX_DEVTOOLS_EXTENSION__()
-  : undefined;
+  : identity;
 /* eslint-enable */
 
 const configureStore = (initialState, customEnhancer) => {
