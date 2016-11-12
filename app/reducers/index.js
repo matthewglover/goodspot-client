@@ -49,7 +49,7 @@ export const getSelectedLocality = (state: AppState): Object =>
 export const getSelectedLocalityId = (state: AppState): string =>
   getSelectedLocality(state).place_id;
 
-export const getPlacesForSelectedLocality = (state: AppState): Object =>
+export const getPlacesForSelectedLocality = (state: AppState): ?Object =>
   fromPlaces.getPlacesForLocality(state.places, getSelectedLocalityId(state));
 
 export const getPlaceFinderView = (state: AppState): string =>
