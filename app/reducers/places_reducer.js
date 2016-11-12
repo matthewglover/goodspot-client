@@ -47,7 +47,7 @@ export default places;
 export const getPlacesForLocality =
   (state: PlacesState, localityId: string): ?Object =>
     (is(Object, state[localityId])
-      ? state[localityId].results
+      ? state[localityId].places
       : undefined);
 
 export const placeDataExistsForLocality =

@@ -74,7 +74,7 @@ test('fromPlacesReducer.getPlacesForLocality returns all places for given locali
 
   t.is(
     fromPlacesReducer.getPlacesForLocality(state, 'locality1'),
-    state.locality1.results);
+    state.locality1.places);
 });
 
 test('fromPlacesReducer.placeDataExistsForLocality returns if data exists for locality', (t) => {

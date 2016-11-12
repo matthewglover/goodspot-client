@@ -77,7 +77,7 @@ test('getSelectedLocalityId returns selected locality id', (t) => {
 test('getPlacesForSelectedLocality returns places for selected locality id', (t) => {
   t.is(
     fromReducer.getPlacesForSelectedLocality(loggedInState),
-    loggedInState.places[loggedInState.placeFinder.locality.place_id].results);
+    loggedInState.places[loggedInState.placeFinder.locality.place_id].places);
 });
 
 test('getPlaceFinderView returns current placeFinder view state', (t) => {
