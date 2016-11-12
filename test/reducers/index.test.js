@@ -1,96 +1,10 @@
 /* eslint-disable max-len */
 import test from 'ava';
 import * as fromReducer from '../../app/reducers';
-
-const err = new Error('Login failed');
-
-const credentials = Object.freeze({
-  name: 'Matt',
-  id: '1122334455',
-});
-
-const jwt = 'awebtokenstring';
-
-const placeOne = {
-  place_id: 'EipCZXRobmFsIEdyZWVuIFJvYWQsIExvbmRvbiwgVW5pdGVkIEtpbmdkb20',
-  name: 'The Shoreditch',
-  vicinity: '145 Shoreditch High Street, London',
-  geometry: {
-    location: {
-      lat: 51.52588799999999,
-      lng: -0.07814800000000001,
-    },
-  },
-  types: ['bar', 'nightclub', 'restaurant'],
-};
-
-const placeTwo = {
-  place_id: 'ChIJJ9DmjrocdkgR-TgBZwwKdKc',
-  name: 'Callooh Callay',
-  vicinity: '65 Rivington St, London',
-  geometry: {
-    location: {
-      lat: 51.5262938,
-      lng: -0.0799016,
-    },
-  },
-  types: ['bar', 'nightclub', 'restaurant'],
-};
-
-const localityId = 'EipCZXRobmFsIEdyZWVuIFJvYWQsIExvbmRvbiwgVW5pdGVkIEtpbmdkb20';
-
-const localityIdData = {
-  next_page_token: '12345token',
-  results: [
-    placeOne,
-    placeTwo,
-  ],
-};
-
-
-const places = {
-  [localityId]: localityIdData,
-};
-
-// Freeze initial states, as want to check that reducer doesn't mutate
-const loggedOutState = Object.freeze({
-  auth: {
-    status: 'loggedOut',
-  },
-});
-
-const loggingInState = Object.freeze({
-  auth: {
-    status: 'loggingIn',
-  },
-});
-
-const loggedInState = Object.freeze({
-  auth: {
-    status: 'loggedIn',
-    credentials,
-    jwt,
-  },
-  localitySearch: [
-    { description: 'Bethnal Green', place_id: '12345' },
-    { description: 'Honor Oak Park', place_id: '4324' },
-  ],
-  placeFinder: {
-    locality: {
-      description: 'Bethnal Green',
-      place_id: localityId,
-    },
-    view: 'list',
-  },
-  places,
-});
-
-const loginFailureState = Object.freeze({
-  auth: {
-    status: 'loginFailure',
-    err,
-  },
-});
+import loggedInState from '../helpers/logged_in_state';
+import loggingInState from '../helpers/logging_in_state';
+import loginFailureState from '../helpers/login_failure_state';
+import loggedOutState from '../helpers/logged_out_state';
 
 test('getIsLoggedIn returns true if logged in', (t) => {
   t.true(fromReducer.getIsLoggedIn(loggedInState));
@@ -126,7 +40,7 @@ test('getIsLoggingIn returns false if no login failure', (t) => {
 });
 
 test('getJwt returns jwt if logged in', (t) => {
-  t.is(fromReducer.getJwt(loggedInState), jwt);
+  t.is(fromReducer.getJwt(loggedInState), 'awebtokenstring');
 });
 
 test('getJwt returns empty string if not logged in', (t) => {
