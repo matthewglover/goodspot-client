@@ -1,5 +1,5 @@
 // @flow
-import { merge, evolve, concat, has, compose, uniqBy, prop } from 'ramda';
+import { merge, evolve, concat, has, compose, uniqBy, prop, is } from 'ramda';
 import {
   PLACES_LOADED } from '../action_types';
 
@@ -45,8 +45,10 @@ const places =
 export default places;
 
 export const getPlacesForLocality =
-  (state: PlacesState, localityId: string): Object =>
-    state[localityId];
+  (state: PlacesState, localityId: string): ?Object =>
+    (is(Object, state[localityId])
+      ? state[localityId].results
+      : undefined);
 
 export const placeDataExistsForLocality =
   (state: PlacesState, localityId: string): boolean =>

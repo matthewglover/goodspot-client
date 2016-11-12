@@ -26,6 +26,7 @@ export default Object.freeze({
   },
   places: {
     12345: {
+      location: { lat: 1, lng: 2 },
       next_page_token: '12345token',
       results: [
         {

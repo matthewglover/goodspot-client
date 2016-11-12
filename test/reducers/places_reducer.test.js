@@ -52,6 +52,7 @@ test('places reducer adds new data to existing localityId on PLACES_LOADED actio
 
   const endState = {
     locality2: {
+      location: placesData.locality2.location,
       next_page_token: morePlacesData.locality2.next_page_token,
       results: concat(initialState.locality2.results, morePlacesData.locality2.results),
     },
@@ -73,7 +74,7 @@ test('fromPlacesReducer.getPlacesForLocality returns all places for given locali
 
   t.is(
     fromPlacesReducer.getPlacesForLocality(state, 'locality1'),
-    state.locality1);
+    state.locality1.results);
 });
 
 test('fromPlacesReducer.placeDataExistsForLocality returns if data exists for locality', (t) => {

@@ -1,5 +1,6 @@
 export default Object.freeze({
   locality2: {
+    location: { lat: 3, lng: 4 },
     next_page_token: 'page3',
     results: [
       {
