@@ -6,25 +6,35 @@ import PlaceFinder from './place_finder';
 import BottomBar from './bottom_bar';
 
 
-const containerStyles = {
-  width: '100%',
-  minHeight: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'flex-top',
-  alignItems: 'center',
+const style = {
+  container: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-top',
+    alignItems: 'center',
+  },
+  headerBar: {
+    position: 'fixed',
+  },
+  placeFinder: { paddingTop: '75px',
+    marginBottom: '50px',
+    width: '100%',
+    height: '100%',
+  },
 };
 
 
 const Splash = (_: void, { muiTheme: { palette } }: MuiTheme) =>
   <div
     style={{
-      ...containerStyles,
+      ...style.container,
       backgroundColor: palette.canvasColor,
     }}
   >
-    <HeaderBar style={{ position: 'fixed' }} />
-    <PlaceFinder style={{ marginTop: '75px', marginBottom: '50px', width: '100%' }} />
+    <HeaderBar style={style.headerBar} />
+    <PlaceFinder style={style.placeFinder} />
     <BottomBar />
   </div>;
 

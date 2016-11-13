@@ -29,6 +29,7 @@
       })();
     </script>
 
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
     <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
     <script src="public/<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
     <% } %>

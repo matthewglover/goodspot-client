@@ -1,5 +1,4 @@
 import { applyMiddleware } from 'redux';
-import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 import throttle from 'lodash/throttle';
 import { identity, compose, pick } from 'ramda';
@@ -19,12 +18,7 @@ const saveStateToLocalStorage =
 
 const persistedState = loadState();
 
-const logger =
-  process.env.NODE_ENV !== 'production'
-    ? createLogger()
-    : undefined;
-
-const middlewares = [thunk, epicMiddleware, logger].filter(identity);
+const middlewares = [thunk, epicMiddleware].filter(identity);
 
 const store = configureStore(persistedState, applyMiddleware(...middlewares));
 

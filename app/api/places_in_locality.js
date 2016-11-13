@@ -1,5 +1,4 @@
 import { fetchProtected, apiUrl, objToQueryString } from './helpers';
-import { trace } from '../loggers';
 
 const PLACES_IN_LOCALITY_URL =
   `${apiUrl}/places-in-locality`;
@@ -10,7 +9,6 @@ const resourceUrl = (place_id) =>
 
 export const placesInLocality =
   (jwt: string, placeId: string): Promise<Object> =>
-    fetchProtected(resourceUrl(placeId), jwt)
-    .then(trace('places in locality:'));
+    fetchProtected(resourceUrl(placeId), jwt);
 
 export default placesInLocality;

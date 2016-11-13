@@ -8,7 +8,7 @@ import {
   LOCALITY_SELECTED,
   LOADING_PLACES,
   PLACES_LOADED } from '../action_types';
-import { trace } from '../loggers';
+// import { trace } from '../loggers';
 
 const { fromPromise } = Observable;
 
@@ -16,8 +16,7 @@ const { fromPromise } = Observable;
 const localityStream = (actionStream) =>
   actionStream
   .ofType(LOCALITY_SELECTED)
-  .map(pick(['locality']))
-  .map(trace('wtf:::::::::::'));
+  .map(pick(['locality']));
 
 
 const placesInLocalityPromise =
