@@ -1,10 +1,19 @@
 // @flow
 import React, { PropTypes } from 'react';
+import GoogleMap from './google_map';
+
+const style = {
+  map: {
+    width: '100%',
+    height: '100%',
+    paddingBottom: '105px',
+  },
+};
 
 const PlaceMap = ({ places }: { places: Object[] }) =>
   (places.length > 0
-    ? (<div>
-      ooh it's a map, nice!
+    ? (<div style={style.map}>
+      <GoogleMap />
     </div>)
     : null);
 
