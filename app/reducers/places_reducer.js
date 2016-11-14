@@ -53,3 +53,9 @@ export const getPlacesForLocality =
 export const placeDataExistsForLocality =
   (state: PlacesState, localityId: string): boolean =>
     has(localityId, state);
+
+export const getLocationForSelectedLocality =
+  (state: PlacesState, localityId: string): ?Object =>
+    (is(Object, state[localityId])
+      ? state[localityId].location
+      : undefined);

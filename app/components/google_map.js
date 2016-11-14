@@ -1,5 +1,5 @@
 /* global google */
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 const style = {
   googleMap: {
@@ -10,10 +10,15 @@ const style = {
 
 class GoogleMap extends Component {
 
+  static propTypes = {
+    position: PropTypes.array.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }
+
   componentDidMount() {
     const mapOptions = {
-      center: new google.maps.LatLng(51.52588799999999, -0.07814800000000001),
-      zoom: 16,
+      center: new google.maps.LatLng(...this.props.position),
+      zoom: this.props.zoom,
     };
 
     this.map = new google.maps.Map(this.mapCanvas, mapOptions);

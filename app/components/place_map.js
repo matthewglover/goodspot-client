@@ -10,10 +10,13 @@ const style = {
   },
 };
 
-const PlaceMap = ({ places }: { places: Object[] }) =>
+const PlaceMap = ({ places, location }: { places: Object[], location: Number[] }) =>
   (places.length > 0
     ? (<div style={style.map}>
-      <GoogleMap />
+      <GoogleMap
+        position={location}
+        zoom={16}
+      />
     </div>)
     : null);
 
