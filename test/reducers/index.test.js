@@ -85,3 +85,9 @@ test('getPlaceFinderView returns current placeFinder view state', (t) => {
     fromReducer.getPlaceFinderView(loggedInState),
     loggedInState.placeFinder.view);
 });
+
+test('getLocationForSelectedLocality returns location object', (t) => {
+  t.is(
+    fromReducer.getLocationForSelectedLocality(loggedInState),
+    loggedInState.places[loggedInState.placeFinder.locality.place_id].location);
+});

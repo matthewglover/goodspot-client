@@ -54,3 +54,6 @@ export const getPlacesForSelectedLocality = (state: AppState): ?Object =>
 
 export const getPlaceFinderView = (state: AppState): string =>
   fromPlaceFinder.getView(state.placeFinder);
+
+export const getLocationForSelectedLocality = (state: AppState): ?Object =>
+  fromPlaces.getLocationForSelectedLocality(state.places, getSelectedLocalityId(state));
